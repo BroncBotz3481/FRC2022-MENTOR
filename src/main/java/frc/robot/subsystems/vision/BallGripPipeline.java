@@ -35,6 +35,8 @@ public class BallGripPipeline
 
   /**
    * This is the primary method that runs the entire pipeline and updates the outputs.
+   * @param source0 Matrix source to perform processing on.
+   * @param ball Ball color to care about.
    */
   public void process(Mat source0, Color ball)
   {
@@ -117,7 +119,7 @@ public class BallGripPipeline
   /**
    * This method is a generated getter for the output of a Filter_Contours.
    *
-   * @return ArrayList<MatOfPoint> output from Filter_Contours.
+   * @return {@link ArrayList<MatOfPoint>} output from Filter_Contours.
    */
   public ArrayList<MatOfPoint> filterContoursRedOutput()
   {
@@ -127,7 +129,7 @@ public class BallGripPipeline
   /**
    * This method is a generated getter for the output of a Filter_Contours.
    *
-   * @return ArrayList<MatOfPoint> output from Filter_Contours.
+   * @return {@link ArrayList<MatOfPoint>} output from Filter_Contours.
    */
   public ArrayList<MatOfPoint> filterContoursBlueOutput()
   {

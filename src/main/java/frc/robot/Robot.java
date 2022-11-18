@@ -5,19 +5,9 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.sensors.CANCoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.robotdrives.swerve.SwerveModule;
-import frc.robot.robotdrives.swerve.SwerveModule.SwerveModuleLocation;
-import frc.robot.robotdrives.swerve.SwerveModule.SwerveModuleMotorType;
-import java.util.Map;
 
 
 /**

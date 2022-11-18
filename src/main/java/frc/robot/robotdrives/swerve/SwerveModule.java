@@ -76,12 +76,13 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   private       SparkMaxPIDController m_spinPIDContrller;
 
   /**
-   * Swerve module constructor. Both motors <bold>MUST</bold> be a {@link MotorController} class.
+   * Swerve module constructor. Both motors <b>MUST</b> be a {@link MotorController} class.
    *
-   * @param mainMotor  Main drive motor. Must be a {@link MotorController} type.
-   * @param angleMotor Angle motor for controlling the angle of the swerve module.
-   * @param encoder    Absolute encoder for the swerve module.
-   * @param gearRatio  Drive gear ratio to get the encoder ticks per rotation.
+   * @param mainMotor      Main drive motor. Must be a {@link MotorController} type.
+   * @param angleMotor     Angle motor for controlling the angle of the swerve module.
+   * @param encoder        Absolute encoder for the swerve module.
+   * @param gearRatio      Drive gear ratio to get the encoder ticks per rotation.
+   * @param swervePosition Swerve Module position on the robot.
    */
   public SwerveModule(DriveMotorType mainMotor, AngleMotorType angleMotor, AbsoluteEncoderType encoder,
                       SwerveModuleLocation swervePosition, double gearRatio) throws Exception
@@ -379,14 +380,14 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    * @param profile               The {@link CTRE_slotIdx} to use.
    * @param P                     Proportional gain for closed loop. This is multiplied by closed loop error in sensor
    *                              units. Note the closed loop output interprets a final value of 1023 as full output. So
-   *                              use a gain of ‘0.25’ to get full output if err is 4096u (Mag Encoder 1 rotation)
+   *                              use a gain of '0.25' to get full output if err is 4096u (Mag Encoder 1 rotation)
    * @param I                     Integral gain for closed loop. This is multiplied by closed loop error in sensor units
    *                              every PID Loop. Note the closed loop output interprets a final value of 1023 as full
-   *                              output. So use a gain of ‘0.00025’ to get full output if err is 4096u (Mag Encoder 1
+   *                              output. So use a gain of '0.00025' to get full output if err is 4096u (Mag Encoder 1
    *                              rotation) after 1000 loops
    * @param D                     Derivative gain for closed loop. This is multiplied by derivative error (sensor units
    *                              per PID loop). Note the closed loop output interprets a final value of 1023 as full
-   *                              output. So use a gain of ‘250’ to get full output if derr is 4096u per (Mag Encoder 1
+   *                              output. So use a gain of '250' to get full output if derr is 4096u per (Mag Encoder 1
    *                              rotation) per 1000 loops (typ 1 sec)
    * @param F                     Feed Fwd gain for Closed loop. See documentation for calculation details. If using
    *                              velocity, motion magic, or motion profile, use (1023 * duty-cycle /
@@ -429,7 +430,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
 
   /**
    * Set the PIDF coefficients for the closed loop PID onboard the motor controller.
-   * <h1>Tuning the PID</h1>
+   * Tuning the PID
    * <p>
    * <b>P</b> = .5 and increase it by .1 until oscillations occur, then decrease by .05 then .005 until oscillations
    * stop and angle is perfect or near perfect.
@@ -649,7 +650,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    * Get the module state.
    *
    * @return SwerveModuleState with the encoder inputs.
-   * @throws Exception Exception if CANCoder doesnt exist
+   * @throws RuntimeException Exception if CANCoder doesnt exist
    */
   public SwerveModuleState getState()
   {

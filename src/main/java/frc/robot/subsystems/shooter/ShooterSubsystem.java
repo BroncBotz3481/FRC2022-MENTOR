@@ -71,13 +71,13 @@ public class ShooterSubsystem extends SubsystemBase
    * @param pid          The PID to use.
    * @param P            Proportional gain for closed loop. This is multiplied by closed loop error in sensor units.
    *                     Note the closed loop output interprets a final value of 1023 as full output. So use a gain of
-   *                     ‘0.25’ to get full output if err is 4096u (Mag Encoder 1 rotation)
+   *                     '0.25' to get full output if err is 4096u (Mag Encoder 1 rotation)
    * @param I            Integral gain for closed loop. This is multiplied by closed loop error in sensor units every
    *                     PID Loop. Note the closed loop output interprets a final value of 1023 as full output. So use a
-   *                     gain of ‘0.00025’ to get full output if err is 4096u (Mag Encoder 1 rotation) after 1000 loops
+   *                     gain of '0.00025' to get full output if err is 4096u (Mag Encoder 1 rotation) after 1000 loops
    * @param D            Derivative gain for closed loop. This is multiplied by derivative error (sensor units per PID
    *                     loop). Note the closed loop output interprets a final value of 1023 as full output. So use a
-   *                     gain of ‘250’ to get full output if derr is 4096u per (Mag Encoder 1 rotation) per 1000 loops
+   *                     gain of '250' to get full output if derr is 4096u per (Mag Encoder 1 rotation) per 1000 loops
    *                     (typ 1 sec)
    * @param F            Feed Fwd gain for Closed loop. See documentation for calculation details. If using velocity,
    *                     motion magic, or motion profile, use (1023 * duty-cycle /
@@ -118,7 +118,7 @@ public class ShooterSubsystem extends SubsystemBase
   /**
    * Set the max motor output.
    *
-   * @param maximumOutput Absolute max motor output during closed-loop control modes only. A value of ‘1’ represents
+   * @param maximumOutput Absolute max motor output during closed-loop control modes only. A value of '1' represents
    *                      full output in both directions.
    */
   public void setVelocityVoltageMaximumOutput(double maximumOutput)

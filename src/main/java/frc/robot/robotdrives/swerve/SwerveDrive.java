@@ -147,7 +147,7 @@ public class SwerveDrive<DriveMotorType extends MotorController, SteeringMotorTy
    * Set the swerve module states given an array of states. Normalize the wheel speeds to abide by maximum supplied
    *
    * @param states Module states in a specified order. [front left, front right, back left, back right]
-   * @throws Exception If the CANCoder is inaccessible or not configured.
+   * @throws RuntimeException If the CANCoder is inaccessible or not configured.
    */
   public void setModuleStates(SwerveModuleState[] states)
   {
