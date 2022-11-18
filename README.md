@@ -4,14 +4,14 @@
   * Subsystems = Interface  
   * Commands = Engines  
   * Policy = Policy  
+  
+# How do I get started?  
+* This repository has [codespaces](https://github.com/features/codespaces) configured so all you ahve to do is create a codespace based off this repository and start programming!
 
 # Why have this?
 * The purpose of this code is to provide an ideal isolated repository of code that meets quality standards agreed upon by programming mentors.  
 * Students are expected to follow architectural guidelines used within this module.  
 * Mentors get curious too!  
-
-# InteliJ Notes
-* To get InteliSense working add the jar files from `wpilib/2022/maven/com/ctre/*` and `wpilib/2022/maven/com/revrobotics/*`  
 
 # Basic Architecture  
 * All Subsystems **MUST** have a "Policy Class" which contains static variables that may be userful to access about that subsystem without having to fetch the object itself. 
@@ -68,3 +68,6 @@
 
 # Misc  
 * Do you guys want to run DOOM on a RoboRIO? :)
+
+# InteliJ Notes
+* To get InteliSense working add the jar files from `wpilib/2022/maven/com/ctre/*` and `wpilib/2022/maven/com/revrobotics/*`
