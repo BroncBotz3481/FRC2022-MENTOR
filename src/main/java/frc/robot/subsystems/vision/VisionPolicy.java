@@ -2,6 +2,9 @@ package frc.robot.subsystems.vision;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
+/**
+ * Vision policy class containing up to date data on the red and blue balls visible by the camera.
+ */
 public class VisionPolicy
 {
 

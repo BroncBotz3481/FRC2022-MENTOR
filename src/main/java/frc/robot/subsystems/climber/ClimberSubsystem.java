@@ -15,14 +15,33 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.climber.ClimberPolicy.LeftColorSensor;
 
+/**
+ * Climber subsystem for the robot.
+ */
 public class ClimberSubsystem extends SubsystemBase
 {
 
+  /**
+   * Victor SPX with WPI protections for the left motor.
+   */
   private final WPI_VictorSPX        leftMotorClimb;
+  /**
+   * Victor SPX with WPI protections for the right motor.
+   */
   private final WPI_VictorSPX        rightMotorClimb;
+  /**
+   * Motor Controller group for both left and right motors.
+   */
   private final MotorControllerGroup climber;
+  /**
+   * Left color sensor.
+   */
   private final ColorSensorV3        leftColor;//, rightColor;
 
+  /**
+   * Constructor for the ClimberSubsystem initializes the VictorSPX's with the CANID's from {@link Constants.Climber},
+   * the color sensor with the onboard I2C, and the MotorControllerGroup.
+   */
   public ClimberSubsystem()
   {
     leftMotorClimb = new WPI_VictorSPX(Constants.Climber.LeftClimberMotorCANID);

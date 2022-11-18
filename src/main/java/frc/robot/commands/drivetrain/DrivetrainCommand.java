@@ -19,7 +19,7 @@ import frc.robot.subsystems.drivetrain.DrivetrainSubsystem;
 import java.util.function.DoubleSupplier;
 
 /**
- * An example command that uses an example subsystem.
+ * DriveTrain command for a DifferentialDrive driven by tank drive controlls.
  */
 public class DrivetrainCommand extends CommandBase
 {

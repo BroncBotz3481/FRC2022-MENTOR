@@ -22,10 +22,24 @@ package frc.robot.subsystems.climber;
 public final class ClimberPolicy
 {
 
+  /**
+   * Power applied to the left climb motor.
+   */
   public static double leftPowerClimb  = 0;
+  /**
+   * Power applied to the right climb motor.
+   */
   public static double rightPowerClimb = 0;
+  /**
+   * Generic power applied to both motors.
+   */
   public static double power           = 0;
 
+  /**
+   * If the left color sensor detects the red band from the top and bottom of the climber stop!
+   *
+   * @return Climber power.
+   */
   public static double getPower()
   {
     if (LeftColorSensor.red < 50)
@@ -35,10 +49,19 @@ public final class ClimberPolicy
     return ClimberPolicy.power;
   }
 
+  /**
+   * Object continuously updated with data from the left color sensor.
+   */
   public static class LeftColorSensor
   {
 
+    /**
+     * Data from the left color sensor.
+     */
     public static int red, green, blue, ir, proximity;
+    /**
+     * If the left color sensor is attached.
+     */
     public static boolean connected;
   }
 

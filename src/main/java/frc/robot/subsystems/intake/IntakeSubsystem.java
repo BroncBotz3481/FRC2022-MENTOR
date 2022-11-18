@@ -32,7 +32,7 @@ public class IntakeSubsystem extends SubsystemBase
 
   /**
    * Initialize the subsystem by creating the motor controller and solenoids up, the intake motor is inverted by default
-   * to suck in.
+   * to suck in. Initializes the WPI_VictorSPX and Double Solenoid.
    */
   public IntakeSubsystem()
   {

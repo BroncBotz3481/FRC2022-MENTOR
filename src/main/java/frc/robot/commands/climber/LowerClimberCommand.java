@@ -3,7 +3,9 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.climber.ClimberSubsystem;
 
-
+/**
+ * Command to lower the climber.
+ */
 public class LowerClimberCommand extends CommandBase
 {
 

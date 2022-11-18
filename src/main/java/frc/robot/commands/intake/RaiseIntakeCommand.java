@@ -3,12 +3,14 @@ package frc.robot.commands.intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 
-
+/**
+ * Raise the intake and stop the roller.
+ */
 public class RaiseIntakeCommand extends CommandBase
 {
 
   /**
-   * The intake susbsystem.
+   * The intake subsystem.
    */
   private final IntakeSubsystem intakeSubsystem;
 
@@ -35,7 +37,7 @@ public class RaiseIntakeCommand extends CommandBase
 
   /**
    * The main body of a command.  Called repeatedly while the command is scheduled. (That is, it is called repeatedly
-   * until {@link #isFinished()}) returns true.)
+   * until {@link #isFinished()}) returns true.) Stop the roller and raise the intake.
    */
   @Override
   public void execute()

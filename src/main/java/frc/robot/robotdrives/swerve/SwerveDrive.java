@@ -16,6 +16,12 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import java.io.Closeable;
 
+/**
+ * SwerveDrive base which is meant to be platform agnostic.
+ *
+ * @param <DriveMotorType>    Drive motor type (CANSparkMax, TalonSRX, TalonFX)
+ * @param <SteeringMotorType> Steering/Azimuth Motor (CANSparkMax, TalonSRX, TalonFX)
+ */
 public class SwerveDrive<DriveMotorType extends MotorController, SteeringMotorType extends MotorController>
     extends RobotDriveBase implements Sendable, AutoCloseable
 {
@@ -42,9 +48,21 @@ public class SwerveDrive<DriveMotorType extends MotorController, SteeringMotorTy
    * Back right swerve drive
    */
   private final SwerveModule<DriveMotorType, SteeringMotorType, CANCoder> m_backRight;
+  /**
+   * Swerve drive kinematics.
+   */
   private final SwerveDriveKinematics                                     swerveKinematics;
+  /**
+   * Constantly updated swerve drive odometry.
+   */
   private final SwerveDriveOdometry                                       swerveOdometry;
+  /**
+   * Pigeon 2.0 centered on the robot.
+   */
   private final WPI_Pigeon2                                               pigeonIMU;
+  /**
+   * Field2d displayed on shuffleboard with current position.
+   */
   private final Field2d                                                   field       = new Field2d();
   /**
    * Maximum speed in meters per second.

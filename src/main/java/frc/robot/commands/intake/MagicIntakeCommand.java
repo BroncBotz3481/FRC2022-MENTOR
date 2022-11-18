@@ -9,16 +9,33 @@ import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.vision.VisionPolicy;
 import frc.robot.subsystems.vision.VisionSubsystem;
 
-
+/**
+ * Magically intake balls of our color using a improvised vision subsystem.
+ */
 public class MagicIntakeCommand extends CommandBase
 {
 
+  /**
+   * Intake subsystem.
+   */
   private final IntakeSubsystem intakeSubsystem;
+  /**
+   * Vision subsystem is fetched through the static reference.
+   */
   private final VisionSubsystem visionSubsystem = VisionSubsystem.getInstance();
 
-
+  /**
+   * Timer for how long there hasn't been a ball of the appropriate color infront of the camera.
+   */
   private final Timer   lostBall   = new Timer();
+  /**
+   * If there is a ball of the appropriate color infront of the camera.
+   */
   private       boolean foundABall = false;
+  /**
+   * Is the robot on the blue alliance?
+   */
+  private       boolean blueAlliance;
 
   /**
    * Raises the intake when there is an appropriately collored ball infront of the intake. Intake will only be down for
@@ -35,25 +52,29 @@ public class MagicIntakeCommand extends CommandBase
   }
 
   /**
-   * The initial subroutine of a command.  Called once when the command is initially scheduled.
+   * The initial subroutine of a command.  Called once when the command is initially scheduled. Intake will last at most
+   * 1 second. Resets the lost ball timer.
    */
   @Override
   public void initialize()
   {
     lostBall.reset();
     IntakePolicy.timeoutSeconds = 1; // Set the intake to timeout after 1 second.
+    blueAlliance = DriverStation.getAlliance() == DriverStation.Alliance.Blue;
   }
 
   /**
    * The main body of a command.  Called repeatedly while the command is scheduled. (That is, it is called repeatedly
-   * until {@link #isFinished()}) returns true.) NOTE: This will slow down the entire command scheduler.
+   * until {@link #isFinished()}) returns true.) NOTE: This will slow down the entire command scheduler. Execute the
+   * command and process exclusively blue or red balls depending on our alliance. If a ball of the appropriate color is
+   * found it will drop and intake the ball.
    */
   @Override
   public void execute()
   {
     // THIS WILL SLOW DOWN THE ENTIRE COMMAND SCHEDULER.
 
-    if (DriverStation.getAlliance() == DriverStation.Alliance.Blue)
+    if (blueAlliance)
     {
       visionSubsystem.processBlueBalls();
     } else
@@ -89,6 +110,7 @@ public class MagicIntakeCommand extends CommandBase
    * once and finishing immediately. It is recommended to use *
    * {@link edu.wpi.first.wpilibj2.command.InstantCommand InstantCommand} for such an operation.
    * </p>
+   * This command must be interrupted.
    *
    * @return whether this command has finished.
    */
@@ -104,7 +126,7 @@ public class MagicIntakeCommand extends CommandBase
    * The action to take when the command ends. Called when either the command finishes normally -- that is it is called
    * when {@link #isFinished()} returns true -- or when  it is interrupted/canceled. This is where you may want to wrap
    * up loose ends, like shutting off a motor that was being used in the command.
-   *
+   * When the command ends the intake will be raised and roller stopped.
    * @param interrupted whether the command was interrupted/canceled
    */
   @Override

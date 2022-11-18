@@ -33,15 +33,32 @@ import frc.robot.Constants;
 import frc.robot.Constants.DriveTrain;
 import java.util.Map;
 
+/**
+ * Differential Drive subsystem which also records odometry.
+ */
 public class DrivetrainSubsystem extends SubsystemBase
 {
 
+  /**
+   * Front left spark max.
+   */
   private final CANSparkMax frontLeftMotor;
+  /**
+   * Back left spark max.
+   */
   private final CANSparkMax backLeftMotor;
+  /**
+   * Front right spark max.
+   */
   private final CANSparkMax frontRightMotor;
+  /**
+   * Back right spark max.
+   */
   private final CANSparkMax backRightMotor;
 
-
+  /**
+   * Differential drive class to help control the robot.
+   */
   private final DifferentialDrive driveTrain;
 
   /**
@@ -60,13 +77,17 @@ public class DrivetrainSubsystem extends SubsystemBase
    * SparkMAX PID Controllers
    */
   private final SparkMaxPIDController leftPIDController, rightPIDController;
-
+  /**
+   * Simple widgets for controlling the power scale during testing, should not be used during matches.
+   */
   private final SimpleWidget powerScaleWidget, backwardsScaling;
-
+  /**
+   * Field widget to display our position on the field.
+   */
   private final Field2d fieldWidget;
 
   /**
-   * DriveTrain subsystem using a DifferentialDrive base.
+   * DriveTrain subsystem using a DifferentialDrive base. Initializes the SparkMax's and sends widgets to Shuffleboard.
    */
   public DrivetrainSubsystem()
   {

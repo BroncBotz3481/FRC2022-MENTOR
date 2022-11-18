@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.opencv.core.Mat;
 
+/**
+ * Vision subsystem which will only run the GRIP pipeline which the corresponding functions are called.
+ */
 public class VisionSubsystem extends SubsystemBase
 {
 
@@ -24,6 +27,9 @@ public class VisionSubsystem extends SubsystemBase
   // With eager singleton initialization, any static variables/fields used in the
   // constructor must appear before the "INSTANCE" variable so that they are initialized
   // before the constructor is called when the "INSTANCE" variable initializes.
+  /**
+   * Usb camera connected to the roboRIO
+   */
   public               UsbCamera        camera;
   /**
    * Stream to upload what the redBall filter looks like.

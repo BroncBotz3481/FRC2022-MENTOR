@@ -3,12 +3,22 @@ package frc.robot.commands.index;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.index.IndexSubsystem;
 
-
+/**
+ * Stop the index command
+ */
 public class StopIndexCommand extends CommandBase
 {
 
+  /**
+   * Index subsystem.
+   */
   private final IndexSubsystem indexSubsystem;
 
+  /**
+   * Constructor for the stop index command, requires control of the index subsystem.
+   *
+   * @param indexSubsystem Initialized index subsystem.
+   */
   public StopIndexCommand(IndexSubsystem indexSubsystem)
   {
     this.indexSubsystem = indexSubsystem;
@@ -29,6 +39,7 @@ public class StopIndexCommand extends CommandBase
   /**
    * The main body of a command.  Called repeatedly while the command is scheduled. (That is, it is called repeatedly
    * until {@link #isFinished()}) returns true.)
+   * Stops the index.
    */
   @Override
   public void execute()

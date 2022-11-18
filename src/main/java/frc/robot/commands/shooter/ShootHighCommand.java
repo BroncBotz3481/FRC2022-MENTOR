@@ -6,7 +6,9 @@ import frc.robot.subsystems.index.IndexSubsystem;
 import frc.robot.subsystems.shooter.ShooterPolicy;
 import frc.robot.subsystems.shooter.ShooterSubsystem;
 
-
+/**
+ * Shoot for the high goal command.
+ */
 public class ShootHighCommand extends CommandBase
 {
 
@@ -35,7 +37,8 @@ public class ShootHighCommand extends CommandBase
   }
 
   /**
-   * The initial subroutine of a command.  Called once when the command is initially scheduled.
+   * The initial subroutine of a command.  Called once when the command is initially scheduled. Enable the index
+   * override and lower the hood.
    */
   @Override
   public void initialize()
@@ -46,7 +49,8 @@ public class ShootHighCommand extends CommandBase
 
   /**
    * The main body of a command.  Called repeatedly while the command is scheduled. (That is, it is called repeatedly
-   * until {@link #isFinished()}) returns true.)
+   * until {@link #isFinished()}) returns true.) Set the shooter velocity to {@link ShooterPolicy}.highPIDTarget and
+   * index a ball into it if the RPM is within 100RPM of the goal.
    */
   @Override
   public void execute()
@@ -86,6 +90,8 @@ public class ShootHighCommand extends CommandBase
    * The action to take when the command ends. Called when either the command finishes normally -- that is it is called
    * when {@link #isFinished()} returns true -- or when  it is interrupted/canceled. This is where you may want to wrap
    * up loose ends, like shutting off a motor that was being used in the command.
+   * <p>
+   * Disable the index override, stop the shooter, and stop the index.
    *
    * @param interrupted whether the command was interrupted/canceled
    */

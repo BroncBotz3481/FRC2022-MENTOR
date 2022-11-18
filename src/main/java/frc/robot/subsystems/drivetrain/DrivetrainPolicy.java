@@ -224,10 +224,21 @@ public final class DrivetrainPolicy
     // kA shouldn't be needed but it is the unit voltage * ((seconds^2)/distance)
   }
 
+  /**
+   * Trajectory generation constraints.
+   */
   public static class TrajectoryVelocityConstraints
   {
 
+    /**
+     * Max velocity per second for the trajectory. Used in
+     * {@link frc.robot.commands.autonomous.TrajectorySampleCommand}
+     */
     public static double maxVelocityPerSecond                  = 12;
+    /**
+     * Max acceleration in meters per second for the trajectory. Used in
+     * {@link frc.robot.commands.autonomous.TrajectorySampleCommand}
+     */
     public static double maxAccelerationMetersPerSecondSquared = 12;
   }
 }

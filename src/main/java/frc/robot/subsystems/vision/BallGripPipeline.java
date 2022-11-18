@@ -24,8 +24,13 @@ import org.opencv.imgproc.Imgproc;
 public class BallGripPipeline
 {
 
-  //Outputs
+  /**
+   * Main outputs of filtered contours that were identified for red balls.
+   */
   private final ArrayList<MatOfPoint> filterContoursRedOutput  = new ArrayList<MatOfPoint>();
+  /**
+   * Main outputs of filtered contours that were identified for blue balls.
+   */
   private final ArrayList<MatOfPoint> filterContoursBlueOutput = new ArrayList<MatOfPoint>();
 
 //    static

@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+/**
+ * Subsystem to control the index of balls to the shooter on the robot.
+ */
 public class IndexSubsystem extends SubsystemBase
 {
 
@@ -30,7 +33,7 @@ public class IndexSubsystem extends SubsystemBase
   //public static boolean isPressed; //if pressure pad is pressed or not
 
   /**
-   * Creates a new ExampleSubsystem.
+   * Creates the index subsystem and initializes the index VictorSPX, and pressure pad.
    */
   public IndexSubsystem()
   {
@@ -54,8 +57,8 @@ public class IndexSubsystem extends SubsystemBase
   }
 
   /**
-   * Alias to reverse the index. Reverse the index for intaking until the pressure pad is hit unless an override is
-   * set.
+   * Alias to reverse the index. Reverse the index for intaking until the pressure pad is hit unless an override is set.
+   * Moves the balls toward the shooter.
    */
   public void reverse()
   {
@@ -63,7 +66,7 @@ public class IndexSubsystem extends SubsystemBase
   }
 
   /**
-   * Alias to outtake a ball.
+   * Alias to outtake a ball. Moves the ball away from the shooter.
    */
   public void forward()
   {

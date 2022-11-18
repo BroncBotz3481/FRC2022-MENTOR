@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Create and follow a predefined Trajectory using WPILib's classes
+ */
 public class TrajectorySampleCommand extends CommandBase
 {
 

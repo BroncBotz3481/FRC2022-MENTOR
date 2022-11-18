@@ -21,14 +21,32 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+/**
+ * Shooter subsystem for controller the shooter on the robot.
+ */
 public class ShooterSubsystem extends SubsystemBase
 {
 
+  /**
+   * Main shooter motor is a talon srx with an encoder attached to it.
+   */
   private final WPI_TalonSRX    shooterMotor;
+  /**
+   * Second motor follows the main shooter motor.
+   */
   private final WPI_VictorSPX   secondMotor;
+  /**
+   * DoubleSolenoid which represents the hood.
+   */
   private final DoubleSolenoid  hood;
+  /**
+   * Shuffleboard tab for diagnostics.
+   */
   private final ShuffleboardTab shooterTab;
 
+  /**
+   * Initialize the shooter motors and double solenoid, while adding widgets to shuffleboard for shooter diagnostics.
+   */
   public ShooterSubsystem()
   {
     hood = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.HoodPneumatics.ForwardChannel,

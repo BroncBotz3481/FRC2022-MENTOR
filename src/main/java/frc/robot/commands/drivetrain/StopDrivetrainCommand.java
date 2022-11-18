@@ -5,12 +5,22 @@ import frc.robot.Constants.DriveTrain;
 import frc.robot.subsystems.drivetrain.DrivetrainPolicy;
 import frc.robot.subsystems.drivetrain.DrivetrainSubsystem;
 
-
+/**
+ * Stop the DriveTrain should be the default action when in autonomous mode.
+ */
 public class StopDrivetrainCommand extends CommandBase
 {
 
+  /**
+   * Drive train subsystem.
+   */
   private final DrivetrainSubsystem drivetrainSubsystem;
 
+  /**
+   * Command requires complete control of the drive train subsystem.
+   *
+   * @param drivetrainSubsystem Initialized drive train subsystem.
+   */
   public StopDrivetrainCommand(DrivetrainSubsystem drivetrainSubsystem)
   {
     this.drivetrainSubsystem = drivetrainSubsystem;
@@ -32,6 +42,7 @@ public class StopDrivetrainCommand extends CommandBase
   /**
    * The main body of a command.  Called repeatedly while the command is scheduled. (That is, it is called repeatedly
    * until {@link #isFinished()}) returns true.)
+   * Stops the drive train.
    */
   @Override
   public void execute()
@@ -49,7 +60,7 @@ public class StopDrivetrainCommand extends CommandBase
    * once and finishing immediately. It is recommended to use *
    * {@link edu.wpi.first.wpilibj2.command.InstantCommand InstantCommand} for such an operation.
    * </p>
-   *
+   * Will not exist, must be interrupted.
    * @return whether this command has finished.
    */
   @Override
