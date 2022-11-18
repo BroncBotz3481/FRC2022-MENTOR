@@ -4,7 +4,7 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": ["wpilibsuite.vscode-wpilib","vscjava.vscode-java-pack"]
+      "extensions": ["wpilibsuite.vscode-wpilib","vscjava.vscode-java-pack","vscjava.vscode-gradle"]
     }
   }
 }
