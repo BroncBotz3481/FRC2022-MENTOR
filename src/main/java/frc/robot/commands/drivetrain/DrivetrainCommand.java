@@ -33,6 +33,8 @@ public class DrivetrainCommand extends CommandBase
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
+   * @param left      A function providing a double as the input for the left side of the robot.
+   * @param right     A funuction reference providing a double as the input for the right side of the robot.
    */
   public DrivetrainCommand(DrivetrainSubsystem subsystem, DoubleSupplier left,
                            DoubleSupplier right)

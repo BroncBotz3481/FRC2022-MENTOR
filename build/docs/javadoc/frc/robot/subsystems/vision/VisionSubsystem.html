@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">VisionSubsystem</span>
 <span class="extends-implements">extends edu.wpi.first.wpilibj2.command.SubsystemBase</span></div>
+<div class="block">Vision subsystem which will only run the GRIP pipeline which the corresponding functions are called.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,7 +108,9 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color"><code>edu.wpi.first.cscore.UsbCamera</code></div>
 <div class="col-second even-row-color"><code><a href="#camera" class="member-name-link">camera</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Usb camera connected to the roboRIO</div>
+</div>
 <div class="col-first odd-row-color"><code>edu.wpi.first.cscore.CvSink</code></div>
 <div class="col-second odd-row-color"><code><a href="#computerVisionSink" class="member-name-link">computerVisionSink</a></code></div>
 <div class="col-last odd-row-color">
@@ -186,6 +189,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="camera">
 <h3>camera</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">edu.wpi.first.cscore.UsbCamera</span>&nbsp;<span class="element-name">camera</span></div>
+<div class="block">Usb camera connected to the roboRIO</div>
 </section>
 </li>
 <li>
@@ -230,6 +234,10 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="VisionSubsystem.html" title="class in frc.robot.subsystems.vision">VisionSubsystem</a></span>&nbsp;<span class="element-name">getInstance</span>()</div>
 <div class="block">Returns the Singleton instance of this VisionSubsystem. This static method should be used, rather than the
  constructor, to get the single instance of this class. For example: <code>VisionSubsystem.getInstance();</code></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>static instance of the Vision Subsystem.</dd>
+</dl>
 </section>
 </li>
 <li>

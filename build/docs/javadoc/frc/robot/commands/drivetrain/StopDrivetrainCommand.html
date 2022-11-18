@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StopDrivetrainCommand</span>
 <span class="extends-implements">extends edu.wpi.first.wpilibj2.command.CommandBase</span></div>
+<div class="block">Stop the DriveTrain should be the default action when in autonomous mode.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -104,7 +105,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(frc.robot.subsystems.drivetrain.DrivetrainSubsystem)" class="member-name-link">StopDrivetrainCommand</a><wbr>(<a href="../../subsystems/drivetrain/DrivetrainSubsystem.html" title="class in frc.robot.subsystems.drivetrain">DrivetrainSubsystem</a>&nbsp;drivetrainSubsystem)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Command requires complete control of the drive train subsystem.</div>
+</div>
 </div>
 </section>
 </li>
@@ -167,6 +170,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(frc.robot.subsystems.drivetrain.DrivetrainSubsystem)">
 <h3>StopDrivetrainCommand</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">StopDrivetrainCommand</span><wbr><span class="parameters">(<a href="../../subsystems/drivetrain/DrivetrainSubsystem.html" title="class in frc.robot.subsystems.drivetrain">DrivetrainSubsystem</a>&nbsp;drivetrainSubsystem)</span></div>
+<div class="block">Command requires complete control of the drive train subsystem.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>drivetrainSubsystem</code> - Initialized drive train subsystem.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -189,7 +197,8 @@ loadScripts(document, 'script');</script>
 <h3>execute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">execute</span>()</div>
 <div class="block">The main body of a command.  Called repeatedly while the command is scheduled. (That is, it is called repeatedly
- until <a href="#isFinished()"><code>isFinished()</code></a>) returns true.)</div>
+ until <a href="#isFinished()"><code>isFinished()</code></a>) returns true.)
+ Stops the drive train.</div>
 </section>
 </li>
 <li>
@@ -204,7 +213,8 @@ loadScripts(document, 'script');</script>
  interrupted by another command. Hard coding this command to always return true will result in the command executing
  once and finishing immediately. It is recommended to use *
  <code>InstantCommand</code> for such an operation.
- </p></div>
+ </p>
+ Will not exist, must be interrupted.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>whether this command has finished.</dd>

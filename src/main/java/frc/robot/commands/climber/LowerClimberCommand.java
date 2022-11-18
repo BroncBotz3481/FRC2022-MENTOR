@@ -11,6 +11,10 @@ public class LowerClimberCommand extends CommandBase
 
   private final ClimberSubsystem climberSubsystem;
 
+  /**
+   * Lower climber command constructor.
+   * @param climberSubsystem Initialized climber subsystem.
+   */
   public LowerClimberCommand(ClimberSubsystem climberSubsystem)
   {
     this.climberSubsystem = climberSubsystem;

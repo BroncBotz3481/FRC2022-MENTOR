@@ -79,6 +79,11 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>DriveMotorType</code> - Drive motor type (CANSparkMax, TalonSRX, TalonFX)</dd>
+<dd><code>SteeringMotorType</code> - Steering/Azimuth Motor (CANSparkMax, TalonSRX, TalonFX)</dd>
+</dl>
+<dl class="notes">
 <dt>All Implemented Interfaces:</dt>
 <dd><code>edu.wpi.first.util.sendable.Sendable</code>, <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/AutoCloseable.html" title="class or interface in java.lang" class="external-link">AutoCloseable</a></code></dd>
 </dl>
@@ -86,6 +91,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SwerveDrive&lt;DriveMotorType extends edu.wpi.first.wpilibj.motorcontrol.MotorController,<wbr>SteeringMotorType extends edu.wpi.first.wpilibj.motorcontrol.MotorController&gt;</span>
 <span class="extends-implements">extends edu.wpi.first.wpilibj.drive.RobotDriveBase
 implements edu.wpi.first.util.sendable.Sendable, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/AutoCloseable.html" title="class or interface in java.lang" class="external-link">AutoCloseable</a></span></div>
+<div class="block">SwerveDrive base which is meant to be platform agnostic.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">

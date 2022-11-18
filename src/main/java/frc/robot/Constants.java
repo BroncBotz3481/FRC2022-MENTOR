@@ -26,6 +26,9 @@ public final class Constants
    * Shooter Motor CAN ID for Talon SRX shooter.
    */
   public static final int ShooterMotorCANID         = 1;
+  /**
+   * Shooter motor which follows the main shooter motor.
+   */
   public static final int ShooterFollowerMotorCANID = 2;
   /**
    * Intake motor on drop down intake
@@ -142,7 +145,9 @@ public final class Constants
    */
   public static class Climber
   {
-
+    /**
+     * Left climber motor CANID.
+     */
     public static final int LeftClimberMotorCANID = 4, RightClimberMotorCANID = 5;
   }
 

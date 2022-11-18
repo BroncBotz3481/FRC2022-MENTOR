@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MagicIntakeCommand</span>
 <span class="extends-implements">extends edu.wpi.first.wpilibj2.command.CommandBase</span></div>
+<div class="block">Magically intake balls of our color using a improvised vision subsystem.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -189,7 +190,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="initialize()">
 <h3>initialize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initialize</span>()</div>
-<div class="block">The initial subroutine of a command.  Called once when the command is initially scheduled.</div>
+<div class="block">The initial subroutine of a command.  Called once when the command is initially scheduled. Intake will last at most
+ 1 second. Resets the lost ball timer.</div>
 </section>
 </li>
 <li>
@@ -197,7 +199,9 @@ loadScripts(document, 'script');</script>
 <h3>execute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">execute</span>()</div>
 <div class="block">The main body of a command.  Called repeatedly while the command is scheduled. (That is, it is called repeatedly
- until <a href="#isFinished()"><code>isFinished()</code></a>) returns true.) NOTE: This will slow down the entire command scheduler.</div>
+ until <a href="#isFinished()"><code>isFinished()</code></a>) returns true.) NOTE: This will slow down the entire command scheduler. Execute the
+ command and process exclusively blue or red balls depending on our alliance. If a ball of the appropriate color is
+ found it will drop and intake the ball.</div>
 </section>
 </li>
 <li>
@@ -212,7 +216,8 @@ loadScripts(document, 'script');</script>
  interrupted by another command. Hard coding this command to always return true will result in the command executing
  once and finishing immediately. It is recommended to use *
  <code>InstantCommand</code> for such an operation.
- </p></div>
+ </p>
+ This command must be interrupted.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>whether this command has finished.</dd>
@@ -225,7 +230,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">end</span><wbr><span class="parameters">(boolean&nbsp;interrupted)</span></div>
 <div class="block">The action to take when the command ends. Called when either the command finishes normally -- that is it is called
  when <a href="#isFinished()"><code>isFinished()</code></a> returns true -- or when  it is interrupted/canceled. This is where you may want to wrap
- up loose ends, like shutting off a motor that was being used in the command.</div>
+ up loose ends, like shutting off a motor that was being used in the command.
+ When the command ends the intake will be raised and roller stopped.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>interrupted</code> - whether the command was interrupted/canceled</dd>

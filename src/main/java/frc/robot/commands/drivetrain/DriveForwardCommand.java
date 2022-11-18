@@ -16,7 +16,7 @@ public class DriveForwardCommand extends CommandBase
   /**
    * Constructor for DriveForwardCommand given the drive train subsystem.
    *
-   * @param drivetrainSubsystem
+   * @param drivetrainSubsystem Initialized drive train susbsytem.
    */
   public DriveForwardCommand(DrivetrainSubsystem drivetrainSubsystem)
   {

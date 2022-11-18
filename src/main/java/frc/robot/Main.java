@@ -22,6 +22,7 @@ public final class Main
    * Main initialization method. Do not perform any initialization here.
    * <p>
    * If you change your main Robot class (name), change the parameter type.
+   * @param args Arguments provided on execution
    */
   public static void main(String... args)
   {

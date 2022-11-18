@@ -78,11 +78,12 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   /**
    * Swerve module constructor. Both motors <b>MUST</b> be a {@link MotorController} class.
    *
-   * @param mainMotor      Main drive motor. Must be a {@link MotorController} type.
-   * @param angleMotor     Angle motor for controlling the angle of the swerve module.
-   * @param encoder        Absolute encoder for the swerve module.
-   * @param gearRatio      Drive gear ratio to get the encoder ticks per rotation.
-   * @param swervePosition Swerve Module position on the robot.
+   * @param mainMotor         Main drive motor. Must be a {@link MotorController} type.
+   * @param angleMotor        Angle motor for controlling the angle of the swerve module.
+   * @param encoder           Absolute encoder for the swerve module.
+   * @param gearRatio         Drive gear ratio to get the encoder ticks per rotation.
+   * @param swervePosition    Swerve Module position on the robot.
+   * @throws Exception if an assertion fails.
    */
   public SwerveModule(DriveMotorType mainMotor, AngleMotorType angleMotor, AbsoluteEncoderType encoder,
                       SwerveModuleLocation swervePosition, double gearRatio) throws Exception
@@ -738,7 +739,13 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    */
   public enum SwerveModuleMotorType
   {
-    DRIVE, SPIN
+    /**
+     * Drive Motor
+     */
+    DRIVE, /**
+     * Steering Motor
+     */
+    SPIN
   }
 
   /**
@@ -767,6 +774,21 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    */
   public enum SwerveModuleLocation
   {
-    FrontLeft, BackLeft, FrontRight, BackRight
+    /**
+     * Swerve Module for the front left of the robot chassis.
+     */
+    FrontLeft, 
+    /**
+     * Swerve Module for the back left of the robot chassis.
+     */
+    BackLeft, 
+    /**
+     * Swerve Module for the front right of the robot chassis.
+     */
+    FrontRight,
+    /**
+     * Swerve Module for the back right of the robot chassis.
+     */
+    BackRight
   }
 }

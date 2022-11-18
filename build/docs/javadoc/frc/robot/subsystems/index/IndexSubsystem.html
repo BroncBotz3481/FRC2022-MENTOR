@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">IndexSubsystem</span>
 <span class="extends-implements">extends edu.wpi.first.wpilibj2.command.SubsystemBase</span></div>
+<div class="block">Subsystem to control the index of balls to the shooter on the robot.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -118,7 +119,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">IndexSubsystem</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a new ExampleSubsystem.</div>
+<div class="block">Creates the index subsystem and initializes the index VictorSPX, and pressure pad.</div>
 </div>
 </div>
 </section>
@@ -208,7 +209,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>IndexSubsystem</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IndexSubsystem</span>()</div>
-<div class="block">Creates a new ExampleSubsystem.</div>
+<div class="block">Creates the index subsystem and initializes the index VictorSPX, and pressure pad.</div>
 </section>
 </li>
 </ul>
@@ -234,15 +235,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="reverse()">
 <h3>reverse</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reverse</span>()</div>
-<div class="block">Alias to reverse the index. Reverse the index for intaking until the pressure pad is hit unless an override is
- set.</div>
+<div class="block">Alias to reverse the index. Reverse the index for intaking until the pressure pad is hit unless an override is set.
+ Moves the balls toward the shooter.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="forward()">
 <h3>forward</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">forward</span>()</div>
-<div class="block">Alias to outtake a ball.</div>
+<div class="block">Alias to outtake a ball. Moves the ball away from the shooter.</div>
 </section>
 </li>
 <li>

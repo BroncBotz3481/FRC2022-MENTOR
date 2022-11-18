@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+/**
+ * Intake subsystem for pulling balls off the field.
+ */
 public class IntakeSubsystem extends SubsystemBase
 {
 

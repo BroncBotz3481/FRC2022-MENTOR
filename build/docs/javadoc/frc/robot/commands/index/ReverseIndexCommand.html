@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ReverseIndexCommand</span>
 <span class="extends-implements">extends edu.wpi.first.wpilibj2.command.CommandBase</span></div>
+<div class="block">Reverse the index to move balls towards the shooter.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -104,7 +105,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(frc.robot.subsystems.index.IndexSubsystem)" class="member-name-link">ReverseIndexCommand</a><wbr>(<a href="../../subsystems/index/IndexSubsystem.html" title="class in frc.robot.subsystems.index">IndexSubsystem</a>&nbsp;indexSubsystem)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructor to control the index subsystem.</div>
+</div>
 </div>
 </section>
 </li>
@@ -121,16 +124,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#end(boolean)" class="member-name-link">end</a><wbr>(boolean&nbsp;interrupted)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">When the command ends the index stops.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#execute()" class="member-name-link">execute</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Reverse the index when the command is running.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initialize()" class="member-name-link">initialize</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Stop the index subsystem when command is scheduled.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFinished()" class="member-name-link">isFinished</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Command must be interrupted and never finishes.</div>
+</div>
 </div>
 </div>
 </div>
@@ -158,6 +169,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(frc.robot.subsystems.index.IndexSubsystem)">
 <h3>ReverseIndexCommand</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ReverseIndexCommand</span><wbr><span class="parameters">(<a href="../../subsystems/index/IndexSubsystem.html" title="class in frc.robot.subsystems.index">IndexSubsystem</a>&nbsp;indexSubsystem)</span></div>
+<div class="block">Constructor to control the index subsystem.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>indexSubsystem</code> - Initialized index subsystem.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -172,24 +188,36 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="initialize()">
 <h3>initialize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initialize</span>()</div>
+<div class="block">Stop the index subsystem when command is scheduled.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="execute()">
 <h3>execute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">execute</span>()</div>
+<div class="block">Reverse the index when the command is running.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="isFinished()">
 <h3>isFinished</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFinished</span>()</div>
+<div class="block">Command must be interrupted and never finishes.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>false.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="end(boolean)">
 <h3>end</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">end</span><wbr><span class="parameters">(boolean&nbsp;interrupted)</span></div>
+<div class="block">When the command ends the index stops.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>interrupted</code> - whether the command was interrupted/canceled</dd>
+</dl>
 </section>
 </li>
 </ul>

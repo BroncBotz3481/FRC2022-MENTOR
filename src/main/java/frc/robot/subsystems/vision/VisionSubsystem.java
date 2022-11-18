@@ -68,6 +68,7 @@ public class VisionSubsystem extends SubsystemBase
   /**
    * Returns the Singleton instance of this VisionSubsystem. This static method should be used, rather than the
    * constructor, to get the single instance of this class. For example: {@code VisionSubsystem.getInstance();}
+   * @return static instance of the Vision Subsystem.
    */
   @SuppressWarnings("WeakerAccess")
   public static VisionSubsystem getInstance()

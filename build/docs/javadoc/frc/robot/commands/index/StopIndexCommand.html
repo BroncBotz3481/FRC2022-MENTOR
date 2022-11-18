@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StopIndexCommand</span>
 <span class="extends-implements">extends edu.wpi.first.wpilibj2.command.CommandBase</span></div>
+<div class="block">Stop the index command</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -104,7 +105,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(frc.robot.subsystems.index.IndexSubsystem)" class="member-name-link">StopIndexCommand</a><wbr>(<a href="../../subsystems/index/IndexSubsystem.html" title="class in frc.robot.subsystems.index">IndexSubsystem</a>&nbsp;indexSubsystem)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructor for the stop index command, requires control of the index subsystem.</div>
+</div>
 </div>
 </section>
 </li>
@@ -167,6 +170,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(frc.robot.subsystems.index.IndexSubsystem)">
 <h3>StopIndexCommand</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">StopIndexCommand</span><wbr><span class="parameters">(<a href="../../subsystems/index/IndexSubsystem.html" title="class in frc.robot.subsystems.index">IndexSubsystem</a>&nbsp;indexSubsystem)</span></div>
+<div class="block">Constructor for the stop index command, requires control of the index subsystem.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>indexSubsystem</code> - Initialized index subsystem.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -189,7 +197,8 @@ loadScripts(document, 'script');</script>
 <h3>execute</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">execute</span>()</div>
 <div class="block">The main body of a command.  Called repeatedly while the command is scheduled. (That is, it is called repeatedly
- until <a href="#isFinished()"><code>isFinished()</code></a>) returns true.)</div>
+ until <a href="#isFinished()"><code>isFinished()</code></a>) returns true.)
+ Stops the index.</div>
 </section>
 </li>
 <li>
