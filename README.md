@@ -6,7 +6,8 @@
   * Policy = Policy  
   
 # How do I get started?  
-* This repository has [codespaces](https://github.com/features/codespaces) configured so all you ahve to do is create a codespace based off this repository and start programming!
+* This repository has [codespaces](https://github.com/features/codespaces) configured so all you ahve to do is create a codespace based off this repository and start programming!  
+* Remember to **DELETE** your codespace after you **PUSH** changes to your own repository that way you can make the most out of the 60hrs free per month!  
 
 # Why have this?
 * The purpose of this code is to provide an ideal isolated repository of code that meets quality standards agreed upon by programming mentors.  
