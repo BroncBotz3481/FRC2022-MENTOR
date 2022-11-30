@@ -163,12 +163,10 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    */
   public void setVoltageCompensation(double nominalVoltage, SwerveModuleMotorType type)
   {
-    if (type == SwerveModuleMotorType.DRIVE && isREVDriveMotor())
+    if (isREVDriveMotor() || isREVSpinMotor())
     {
-      ((CANSparkMax) m_driveMotor).enableVoltageCompensation(nominalVoltage);
-    } else if (type == SwerveModuleMotorType.SPIN && isREVSpinMotor())
-    {
-      ((CANSparkMax) m_spinMotor).enableVoltageCompensation(nominalVoltage);
+      ((CANSparkMax) (type == SwerveModuleMotorType.DRIVE ? m_driveMotor : m_spinMotor))
+          .enableVoltageCompensation(nominalVoltage);
     }
     // TODO: Add CTRE voltage compensation.
   }
@@ -182,12 +180,10 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    */
   public void setCurrentLimit(int currentLimit, SwerveModuleMotorType type)
   {
-    if (type == SwerveModuleMotorType.SPIN && isREVSpinMotor())
+    if (isREVSpinMotor() || isREVDriveMotor())
     {
-      ((CANSparkMax) m_spinMotor).setSmartCurrentLimit(currentLimit);
-    } else if (type == SwerveModuleMotorType.DRIVE && isREVDriveMotor())
-    {
-      ((CANSparkMax) m_driveMotor).setSmartCurrentLimit(currentLimit);
+      ((CANSparkMax) (type == SwerveModuleMotorType.SPIN ? m_spinMotor : m_driveMotor))
+          .setSmartCurrentLimit(currentLimit);
     }
 
     // TODO: Add CTRE current limits.
@@ -311,8 +307,6 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
       // K = (pi*diameter)/((ticks[4096]*gearRatio)*10)
       // TODO: Select the feedback sensor.
       motor.configSelectedFeedbackCoefficient((Math.PI * DriveTrain.wheelDiameter) / ((4096 * gearRatio) * 10));
-    } else
-    {
     }
   }
 
