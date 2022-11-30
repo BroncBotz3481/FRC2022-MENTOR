@@ -518,8 +518,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   public void setPIDF(double p, double i, double d, double f, double integralZone,
                       SwerveModuleMotorType swerveModuleMotorType)
   {
-    if ((isREVDriveMotor() && swerveModuleMotorType == SwerveModuleMotorType.DRIVE) ||
-        (isCTRESpinMotor() && swerveModuleMotorType == SwerveModuleMotorType.SPIN))
+    if (isREVSpinMotor() || isREVDriveMotor())
     {
       setREVPIDF(p, i, d, f, integralZone, swerveModuleMotorType);
     } else
