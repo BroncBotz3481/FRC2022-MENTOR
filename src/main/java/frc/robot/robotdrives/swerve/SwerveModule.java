@@ -13,6 +13,8 @@ import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -45,11 +47,11 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   /**
    * The drive gear ratio that is used during configuration of the off-board encoders in the motor controllers.
    */
-  public       double        driveGearRatio             = 1;
+  public       double        driveGearRatio = 1;
   /**
    * Angle offset of the CANCoder at initialization.
    */
-  public       double        angleOffset                = 0;
+  public       double        angleOffset    = 0;
 
   /**
    * Motor Controllers for drive motor of the swerve module.
@@ -78,11 +80,11 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   /**
    * Swerve module constructor. Both motors <b>MUST</b> be a {@link MotorController} class.
    *
-   * @param mainMotor         Main drive motor. Must be a {@link MotorController} type.
-   * @param angleMotor        Angle motor for controlling the angle of the swerve module.
-   * @param encoder           Absolute encoder for the swerve module.
-   * @param gearRatio         Drive gear ratio to get the encoder ticks per rotation.
-   * @param swervePosition    Swerve Module position on the robot.
+   * @param mainMotor      Main drive motor. Must be a {@link MotorController} type.
+   * @param angleMotor     Angle motor for controlling the angle of the swerve module.
+   * @param encoder        Absolute encoder for the swerve module.
+   * @param gearRatio      Drive gear ratio to get the encoder ticks per rotation.
+   * @param swervePosition Swerve Module position on the robot.
    * @throws Exception if an assertion fails.
    */
   public SwerveModule(DriveMotorType mainMotor, AngleMotorType angleMotor, AbsoluteEncoderType encoder,
@@ -154,8 +156,46 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   }
 
   /**
+   * Set the voltage compensation for the swerve module motor.
+   *
+   * @param nominalVoltage Nominal voltage for operation to output to.
+   * @param type           Swerve Module Motor to configure.
+   */
+  public void setVoltageCompensation(double nominalVoltage, SwerveModuleMotorType type)
+  {
+    if (type == SwerveModuleMotorType.DRIVE && isREVDriveMotor())
+    {
+      ((CANSparkMax) m_driveMotor).enableVoltageCompensation(nominalVoltage);
+    } else if (type == SwerveModuleMotorType.SPIN && isREVSpinMotor())
+    {
+      ((CANSparkMax) m_spinMotor).enableVoltageCompensation(nominalVoltage);
+    }
+    // TODO: Add CTRE voltage compensation.
+  }
+
+  /**
+   * Set the current limit for the swerve drive motor, remember this may cause jumping if used in conjunction with
+   * voltage compensation. This is useful to protect the motor from current spikes.
+   *
+   * @param currentLimit Current limit in AMPS at free speed.
+   * @param type         Swerve Drive Motor type to configure.
+   */
+  public void setCurrentLimit(int currentLimit, SwerveModuleMotorType type)
+  {
+    if (type == SwerveModuleMotorType.SPIN && isREVSpinMotor())
+    {
+      ((CANSparkMax) m_spinMotor).setSmartCurrentLimit(currentLimit);
+    } else if (type == SwerveModuleMotorType.DRIVE && isREVDriveMotor())
+    {
+      ((CANSparkMax) m_driveMotor).setSmartCurrentLimit(currentLimit);
+    }
+
+    // TODO: Add CTRE current limits.
+  }
+
+  /**
    * Setup REV motors and configure the values in the class for them. Set's the driveMotorTicksPerRotation, and
-   * m_drivePIDController for the class.
+   * m_drivePIDController for the class. Assumes the absolute encoder reads from 0 to 360.
    *
    * @param motor                 Motor controller.
    * @param swerveModuleMotorType Spin motor or drive motor.
@@ -163,10 +203,22 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    */
   private void setupREVMotor(CANSparkMax motor, SwerveModuleMotorType swerveModuleMotorType, double gearRatio)
   {
+    RelativeEncoder encoder = motor.getEncoder();
+
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 100); // Applied Output, Faults, Sticky Faults, Is Follower
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1,
+                                 20); // Motor Velocity, Motor Temperature, Motor Voltage, Motor Current
+    motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20); // Motor Position
+    // TODO: Configure Status Frame 3 and 4 if necessary
+    //  https://docs.revrobotics.com/sparkmax/operating-modes/control-interfaces
     if (swerveModuleMotorType == SwerveModuleMotorType.DRIVE)
     {
+      motor.setIdleMode(IdleMode.kCoast);
+
       // motor.getEncoder().getCountsPerRevolution()
       m_drivePIDController = motor.getPIDController();
+      m_drivePIDController.setFeedbackDevice(encoder);
+
       // Based off https://github.com/AusTINCANsProgrammingTeam/2022Swerve/blob/main/2022Swerve/src/main/java/frc/robot/Constants.java
       // Math set's the coefficient to the OUTPUT of the ENCODER (RPM == rot/min) which is the INPUT to the PID.
       // We want to set the PID to use MPS == meters/second :)
@@ -177,7 +229,11 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
       configureSparkMax(motor, (Math.PI * DriveTrain.wheelDiameter * gearRatio) / 60, SwerveModuleMotorType.DRIVE);
     } else
     {
+      motor.setIdleMode(IdleMode.kBrake);
+
       m_spinPIDContrller = motor.getPIDController();
+      m_spinPIDContrller.setFeedbackDevice(encoder);
+
       // Math set's the coefficient to the OUTPUT of the ENCODER (ticks) which is the INPUT to the PID.
       // We want to set the PID to use degrees :)
       // Dimensional Analysis
@@ -185,7 +241,10 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
       // deg * (360deg/(42*gearRatio)ticks) = ticks
       // K = 360/(42*gearRatio)
       configureSparkMax(motor, 360 / (42 * gearRatio), SwerveModuleMotorType.SPIN);
+
+      motor.getEncoder().setPosition(absoluteEncoder.getAbsolutePosition());
     }
+
   }
 
   /**
@@ -267,9 +326,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   private void configureSparkMax(CANSparkMax motor, double conversionFactor,
                                  SwerveModuleMotorType swerveModuleMotorType)
   {
-
-    motor.setIdleMode(IdleMode.kBrake);
-    motor.setSmartCurrentLimit(40, 60);
+    motor.setSmartCurrentLimit(40, 60); // Might need to remove this.
     if (swerveModuleMotorType == SwerveModuleMotorType.SPIN)
     {
       motor.getEncoder().setPositionConversionFactor(conversionFactor);
@@ -430,8 +487,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   }
 
   /**
-   * Set the PIDF coefficients for the closed loop PID onboard the motor controller.
-   * Tuning the PID
+   * Set the PIDF coefficients for the closed loop PID onboard the motor controller. Tuning the PID
    * <p>
    * <b>P</b> = .5 and increase it by .1 until oscillations occur, then decrease by .05 then .005 until oscillations
    * stop and angle is perfect or near perfect.
@@ -478,6 +534,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   }
 
   // TODO: Replace with Oblog eventually.
+
   /**
    * Initializes this {@link Sendable} object.
    *
@@ -629,13 +686,23 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   /**
    * Common interface for inverting direction of a motor controller.
    *
-   * @param isInverted The state of inversion true is inverted.
+   * @param isInverted The state of inversion, true is inverted.
    */
   @Override
   public void setInverted(boolean isInverted)
   {
     inverted = isInverted;
     m_driveMotor.setInverted(isInverted);
+  }
+
+  /**
+   * Set the steering motor to be inverted.
+   *
+   * @param isInverted The state of inversion, true is inverted.
+   */
+  public void setInvertedSteering(boolean isInverted)
+  {
+    m_spinMotor.setInverted(isInverted);
   }
 
   /**
@@ -742,7 +809,8 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     /**
      * Drive Motor
      */
-    DRIVE, /**
+    DRIVE,
+    /**
      * Steering Motor
      */
     SPIN
@@ -777,11 +845,11 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     /**
      * Swerve Module for the front left of the robot chassis.
      */
-    FrontLeft, 
+    FrontLeft,
     /**
      * Swerve Module for the back left of the robot chassis.
      */
-    BackLeft, 
+    BackLeft,
     /**
      * Swerve Module for the front right of the robot chassis.
      */
