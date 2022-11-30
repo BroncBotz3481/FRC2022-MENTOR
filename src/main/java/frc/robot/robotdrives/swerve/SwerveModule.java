@@ -242,7 +242,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
       // K = 360/(42*gearRatio)
       configureSparkMax(motor, 360 / (42 * gearRatio), SwerveModuleMotorType.SPIN);
 
-      motor.getEncoder().setPosition(absoluteEncoder.getAbsolutePosition());
+      encoder.setPosition(absoluteEncoder.getAbsolutePosition());
 
       setPIDF(1, 0, 0.1, 0, 100, SwerveModuleMotorType.SPIN);
     }
