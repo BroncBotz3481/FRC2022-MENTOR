@@ -96,9 +96,6 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     requireNonNull(angleMotor);
     requireNonNull(encoder);
 
-    assert mainMotor instanceof MotorController;
-    assert angleMotor instanceof MotorController;
-
     m_driveMotor = mainMotor;
     m_spinMotor = angleMotor;
     swerveLocation = swervePosition;
@@ -131,10 +128,10 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     {
       setupCTREMotor(((BaseTalon) angleMotor), SwerveModuleMotorType.SPIN, 1);
       setupCANCoderRemoteSensor(((BaseTalon) angleMotor), encoder);
-      encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
-      // Convert CANCoder to read data as in 0 to 360
     }
-//    resetEncoders();
+
+    encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
+    // Convert CANCoder to read data as in 0 to 360
   }
 
   /**
@@ -146,6 +143,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   {
     angleOffset = offset;
     absoluteEncoder.configMagnetOffset(offset);
+    resetEncoders();
   }
 
   /**
