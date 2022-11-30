@@ -243,6 +243,8 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
       configureSparkMax(motor, 360 / (42 * gearRatio), SwerveModuleMotorType.SPIN);
 
       motor.getEncoder().setPosition(absoluteEncoder.getAbsolutePosition());
+
+      setPIDF(1, 0, 0.1, 0, 100, SwerveModuleMotorType.SPIN);
     }
 
   }
@@ -364,11 +366,11 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    * Set the PIDF coefficients for the closed loop PID onboard the SparkMax.
    *
    * @param P                     Proportional gain for closed loop. This is multiplied by closed loop error in sensor
-   *                              units.
+   *                              units. Default is 1.0
    * @param I                     Integral gain for closed loop. This is multiplied by closed loop error in sensor units
    *                              every PID Loop.
    * @param D                     Derivative gain for closed loop. This is multiplied by derivative error (sensor units
-   *                              per PID loop).
+   *                              per PID loop). Default is 0.1
    * @param F                     Feed Fwd gain for Closed loop.
    * @param integralZone          Integral Zone can be used to auto clear the integral accumulator if the sensor pos is
    *                              too far from the target. This prevents unstable oscillation if the kI is too large.
