@@ -138,12 +138,14 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    * Configure the magnetic offset in the CANCoder.
    *
    * @param offset Magnetic offset in degrees.
+   * @return SwerveModule for one line configuration.
    */
-  public void setAngleOffset(double offset)
+  public SwerveModule setAngleOffset(double offset)
   {
     angleOffset = offset;
     absoluteEncoder.configMagnetOffset(offset);
     resetEncoders();
+    return this;
   }
 
   /**
@@ -169,8 +171,9 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    *
    * @param nominalVoltage Nominal voltage for operation to output to.
    * @param type           Swerve Module Motor to configure.
+   * @return Self for one line configuration.
    */
-  public void setVoltageCompensation(double nominalVoltage, SwerveModuleMotorType type)
+  public SwerveModule setVoltageCompensation(double nominalVoltage, SwerveModuleMotorType type)
   {
     if (isREVDriveMotor() || isREVSpinMotor())
     {
@@ -178,6 +181,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
           .enableVoltageCompensation(nominalVoltage);
     }
     // TODO: Add CTRE voltage compensation.
+    return this;
   }
 
   /**
@@ -186,8 +190,9 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    *
    * @param currentLimit Current limit in AMPS at free speed.
    * @param type         Swerve Drive Motor type to configure.
+   * @return Self for one line configuration.
    */
-  public void setCurrentLimit(int currentLimit, SwerveModuleMotorType type)
+  public SwerveModule setCurrentLimit(int currentLimit, SwerveModuleMotorType type)
   {
     if (isREVSpinMotor() || isREVDriveMotor())
     {
@@ -196,6 +201,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     }
 
     // TODO: Add CTRE current limits.
+    return this;
   }
 
   /**
@@ -520,9 +526,10 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
    *                              too far from the target. This prevents unstable oscillation if the kI is too large.
    *                              Value is in sensor units.
    * @param swerveModuleMotorType Swerve drive motor type.
+   * @return self for one line configuration.
    */
-  public void setPIDF(double p, double i, double d, double f, double integralZone,
-                      SwerveModuleMotorType swerveModuleMotorType)
+  public SwerveModule setPIDF(double p, double i, double d, double f, double integralZone,
+                              SwerveModuleMotorType swerveModuleMotorType)
   {
     if (isREVSpinMotor() || isREVDriveMotor())
     {
@@ -532,6 +539,8 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
       setCTREPIDF(swerveModuleMotorType == SwerveModuleMotorType.DRIVE ? CTRE_slotIdx.Velocity : CTRE_slotIdx.Distance,
                   p, i, d, f, integralZone, swerveModuleMotorType);
     }
+    
+    return this;
   }
 
   // TODO: Replace with Oblog eventually.
