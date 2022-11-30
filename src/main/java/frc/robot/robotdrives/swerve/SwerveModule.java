@@ -211,9 +211,11 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20); // Motor Position
     // TODO: Configure Status Frame 3 and 4 if necessary
     //  https://docs.revrobotics.com/sparkmax/operating-modes/control-interfaces
+
+    motor.setIdleMode(IdleMode.kBrake);
+
     if (swerveModuleMotorType == SwerveModuleMotorType.DRIVE)
     {
-      motor.setIdleMode(IdleMode.kCoast);
 
       // motor.getEncoder().getCountsPerRevolution()
       m_drivePIDController = motor.getPIDController();
@@ -229,8 +231,6 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
       configureSparkMax(motor, (Math.PI * DriveTrain.wheelDiameter * gearRatio) / 60, SwerveModuleMotorType.DRIVE);
     } else
     {
-      motor.setIdleMode(IdleMode.kBrake);
-
       m_spinPIDContrller = motor.getPIDController();
       m_spinPIDContrller.setFeedbackDevice(encoder);
 
