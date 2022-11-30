@@ -78,17 +78,19 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
   private       SparkMaxPIDController m_spinPIDContrller;
 
   /**
-   * Swerve module constructor. Both motors <b>MUST</b> be a {@link MotorController} class.
+   * Swerve module constructor. Both motors <b>MUST</b> be a {@link MotorController} class. It is recommended to create
+   * a command to reset the encoders when triggered and
    *
    * @param mainMotor      Main drive motor. Must be a {@link MotorController} type.
    * @param angleMotor     Angle motor for controlling the angle of the swerve module.
    * @param encoder        Absolute encoder for the swerve module.
    * @param gearRatio      Drive gear ratio to get the encoder ticks per rotation.
    * @param swervePosition Swerve Module position on the robot.
+   * @param steeringOffset The current offset of the absolute encoder from 0.
    * @throws Exception if an assertion fails.
    */
   public SwerveModule(DriveMotorType mainMotor, AngleMotorType angleMotor, AbsoluteEncoderType encoder,
-                      SwerveModuleLocation swervePosition, double gearRatio) throws Exception
+                      SwerveModuleLocation swervePosition, double gearRatio, double steeringOffset) throws Exception
   {
     requireNonNull(mainMotor);
     requireNonNull(angleMotor);
@@ -107,6 +109,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     driveGearRatio = gearRatio;
     absoluteEncoder = encoder;
     swerveModuleLocation = getSwerveModulePosition(swervePosition);
+    setAngleOffset(steeringOffset);
 
     if (isREVDriveMotor())
     {
@@ -128,27 +131,35 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     {
       setupCTREMotor(((BaseTalon) angleMotor), SwerveModuleMotorType.SPIN, 1);
       setupCANCoderRemoteSensor(((BaseTalon) angleMotor), encoder);
-      encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
-      // Convert CANCoder to read data as in +-180deg
+      encoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
+      // Convert CANCoder to read data as in 0 to 360
     }
-
-    resetEncoders();
+//    resetEncoders();
   }
 
   /**
-   * Reset the REV encoders onboard the NEO's and SparkMax's to the current absolute position read by the absolute
-   * position in the CANCoder, and set's the drive motor to position to 0.
+   * Configure the magnetic offset in the CANCoder.
+   *
+   * @param offset Magnetic offset in degrees.
+   */
+  public void setAngleOffset(double offset)
+  {
+    angleOffset = offset;
+    absoluteEncoder.configMagnetOffset(offset);
+  }
+
+  /**
+   * Reset the REV encoders onboard the NEO's and SparkMax's to 0, and set's the drive motor to position to 0.
    */
   public void resetEncoders()
   {
-    angleOffset = absoluteEncoder.getAbsolutePosition();
     if (isREVDriveMotor())
     {
       ((CANSparkMax) m_driveMotor).getEncoder().setPosition(0);
     }
     if (isREVSpinMotor())
     {
-      ((CANSparkMax) m_spinMotor).getEncoder().setPosition(angleOffset);
+      ((CANSparkMax) m_spinMotor).getEncoder().setPosition(0);
     }
 
     // TODO: Add reset to CTRE motors, and selectively reset the spinMotor and driveMotor.
@@ -237,9 +248,6 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
       // deg * (360deg/(42*gearRatio)ticks) = ticks
       // K = 360/(42*gearRatio)
       configureSparkMax(motor, 360 / (42 * gearRatio), SwerveModuleMotorType.SPIN);
-
-      encoder.setPosition(absoluteEncoder.getAbsolutePosition());
-
       setPIDF(1, 0, 0.1, 0, 100, SwerveModuleMotorType.SPIN);
     }
 
@@ -721,7 +729,7 @@ public class SwerveModule<DriveMotorType extends MotorController, AngleMotorType
     Rotation2d angle;
     if (absoluteEncoder instanceof CANCoder)
     {
-      angle = new Rotation2d(absoluteEncoder.getPosition());
+      angle = new Rotation2d(absoluteEncoder.getAbsolutePosition());
     } else
     {
       throw new RuntimeException("No CANCoder attached.");

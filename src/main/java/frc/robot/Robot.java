@@ -154,7 +154,8 @@ public class Robot extends TimedRobot
       swerve1 = new SwerveModule<>(driveMotorSwerve1,
                                    steerMotorSwerve1, canCoderSwerve1,
                                    SwerveModuleLocation.FrontRight,
-                                   8.14);
+                                   8.14,
+                                   0);
       swerve1.setPIDF(0.5, 0, 0, 0.362, 300, SwerveModuleMotorType.SPIN);
       swerve1.setInverted(true);
       swerve1.stopMotor();
